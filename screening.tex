@@ -1,0 +1,66 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.55in,top=0.45in,bottom=0.45in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[small,compact]{titlesec}
+\usepackage[font=small,labelfont=bf,skip=3pt]{caption}
+\usepackage{mathptmx}
+\usepackage[numbers,sort&compress]{natbib}
+\renewcommand{\bibsection}{\section*{References}}
+\renewcommand{\bibfont}{\scriptsize}
+\setlength{\bibsep}{1pt}
+\setlength{\columnsep}{16pt}
+\setlength{\parskip}{2pt}
+\pagestyle{empty}
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+
+\title{\vspace{-14pt}\large\textbf{Cheap Screens and Costly Checks:\\When AI Prediction Complements Human Research}\vspace{-6pt}}
+\author{\normalsize Claude, guided by John J. Horton\\[-1pt]\footnotesize MIT, NBER \& Expected Parrot}
+\date{\vspace{-16pt}}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\section*{Abstract}
+\noindent A firm has an effectively unlimited supply of candidate projects (product concepts, survey items, hypotheses), a fixed budget of costly human checks, and can launch only one. It also has a free but imperfect AI prediction for every candidate. We ask how the free screen changes the value of the human budget, and what property of the screen matters. It is a fixed-budget best-arm problem over an infinite pool \citep{berry1997,carpentier2015} with multi-stage costly inspection \citep{weitzman1979,ke2019}.
+
+\section*{Model}
+Each project is good ($v{=}1$) or a dud ($v{=}0$); the payoff to launching is $v$. A human check on a project returns $s\in\{0,1\}$ with $\Pr(s{=}v)=p>\tfrac12$. In log-odds each check moves the posterior by $\pm\ell$, $\ell=\log\frac{p}{1-p}$, so a project's state is its net score $n$ (hits minus misses) and its posterior is $\pi(n)=\sigma(\operatorname{logit}\pi+n\ell)$, where $\pi$ is the prior share of good projects.
+
+With an infinite pool, a free screen collapses to one number: the good-share $\pi_1$ in its best bin. Drawing only from that bin, the screen simply moves the prior from the raw base rate $\pi_0$ to $\pi_1$.
+
+Given $B$ checks and prior $\pi$, the decision maker sequentially chooses to check a fresh project or re-check a live one, then launches the highest posterior (or a fresh project, worth $\pi$). Let $V_B(\pi)$ be the value under the optimal policy, computed exactly by dynamic programming over the multiset of live scores.
+
+\section*{Two facts}
+\textbf{Checks are worthless unless they can change the decision.} Posteriors are martingales, so a check never raises the expected quality of the launched project unless some outcome flips which project is launched. A project far ahead is not worth re-checking; one below $\pi$ is dominated by a fresh draw and abandoned. The optimal policy is thus a screen-and-confirm rule with abandonment, the fixed-budget analogue of Wald's sequential probability ratio test \citep{wald1945} with ``reject'' replaced by ``start over.''
+
+\textbf{The human budget is worth most near even odds.} Write $V_B(\pi)=\pi+S(\pi)$, where $S(\pi)$ is the surplus the human budget adds over launching blind. One check changes $\pi$ by an amount proportional to $\pi(1-\pi)$, which vanishes at both ends. Figure~\ref{fig} shows $S(\pi)$ from the exact DP: hump-shaped, peaking at $\pi\approx0.3$--$0.45$ (below $\tfrac12$, because an early miss is cheap to walk away from when fresh draws are free).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\columnwidth]{hump.pdf}
+\caption{How much a fixed budget of $B{=}8$ human checks adds over launching blind, $S(\pi)=V_B(\pi)-\pi$, as a function of the share of good projects $\pi$ among the candidates a screen hands you; $p$ is the accuracy of one human check. A screen helps humans when it lifts $\pi$ toward the peak and displaces them once it lifts $\pi$ past it.}
+\label{fig}
+\end{figure}
+
+\section*{Value of the screen}
+The screen's value decomposes as
+\[
+V_B(\pi_1)-V_B(\pi_0)\;=\;\underbrace{(\pi_1-\pi_0)}_{\text{direct lift}}\;+\;\underbrace{S(\pi_1)-S(\pi_0)}_{\text{interaction}} .
+\]
+The interaction term is positive when the screen carries the pool up the hump and negative when it carries it over. With $p{=}0.7$, $B{=}8$: a screen lifting $\pi$ from $0.05$ to $0.20$ is worth $0.33$ against a face value of $0.15$, because it makes the human budget productive; a screen lifting $\pi$ from $0.50$ to $0.80$ is worth only $0.13$ against a face value of $0.30$, because the humans now have little left to do. \emph{Cheap prediction complements human research as long as it brings candidates to the margin; it substitutes once it carries them past it.} Since most product concepts fail, $\pi_0$ is small and today's screens sit on the complement side.
+
+\section*{What to measure about a screen}
+With an unbounded pool only the maximum attainable precision $\pi_1$ matters; recall and average accuracy are irrelevant, because one never acts on the average candidate. The binding constraint is the mass of duds the screen is \emph{confidently} fooled by, e.g.\ concepts that read well but would not sell. Empirically, in a benchmark of 100 published survey questions \citep{horton2026}, frontier LLMs and a specialist forecaster all order option pairs correctly $\approx\!100\%$ of the time in their top confidence decile, so they are equivalent as screens despite a 1.35-point gap in mean total-variation error. In the band where predicted shares differ by under ten points, every model is right about three times in four. That band is where interesting projects live, and it is where the humans should be spent.
+
+\begin{thebibliography}{9}
+\bibitem[Berry et~al.(1997)]{berry1997} Berry, D.~A., Chen, R.~W., Zame, A., Heath, D.~C., and Shepp, L.~A. (1997). Bandit problems with infinitely many arms. \emph{Annals of Statistics} 25(5), 2103--2116.
+\bibitem[Carpentier and Valko(2015)]{carpentier2015} Carpentier, A. and Valko, M. (2015). Simple regret for infinitely many armed bandits. \emph{ICML}.
+\bibitem[Horton(2026)]{horton2026} Horton, J.~J. (2026). Aaru--EDSL benchmark: LLM one-shot forecasts of survey marginals. \texttt{github.com/expectedparrot/aaru-edsl-benchmark}.
+\bibitem[Ke and Villas-Boas(2019)]{ke2019} Ke, T.~T. and Villas-Boas, J.~M. (2019). Optimal learning before choice. \emph{Journal of Economic Theory} 180, 383--437.
+\bibitem[Wald(1945)]{wald1945} Wald, A. (1945). Sequential tests of statistical hypotheses. \emph{Annals of Mathematical Statistics} 16(2), 117--186.
+\bibitem[Weitzman(1979)]{weitzman1979} Weitzman, M.~L. (1979). Optimal search for the best alternative. \emph{Econometrica} 47(3), 641--654.
+\end{thebibliography}
+\end{document}

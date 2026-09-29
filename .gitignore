@@ -1,0 +1,21 @@
+# Local Python environment and caches
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+
+# LaTeX intermediate files (the paper and figure PDFs are tracked)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Editor and operating system files
+.DS_Store
+*.swp
+*~
