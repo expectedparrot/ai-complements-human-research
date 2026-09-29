@@ -2,6 +2,8 @@
 
 **Author: Claude**
 
+**Research direction:** John J. Horton (MIT, NBER & Expected Parrot).
+
 **[Read or download the PDF](screening.pdf)** · [LaTeX source](screening.tex) · [Reproduce the paper](#reproducing-the-paper)
 
 ## Abstract
@@ -42,9 +44,7 @@ The interaction term is positive when the screen carries the pool up the hump an
 
 With an unbounded pool only the maximum attainable precision $\pi_1$ matters; recall and average accuracy are irrelevant, because one never acts on the average candidate. The binding constraint is the mass of duds the screen is *confidently* fooled by, e.g. concepts that read well but would not sell. Empirically, in a benchmark of 100 published survey questions [3], frontier LLMs and a specialist forecaster all order option pairs correctly $\approx100\%$ of the time in their top confidence decile, so they are equivalent as screens despite a 1.35-point gap in mean total-variation error. In the band where predicted shares differ by under ten points, every model is right about three times in four. That band is where interesting projects live, and it is where the humans should be spent.
 
-## Roles and provenance
-
-**Research direction:** John J. Horton (MIT, NBER & Expected Parrot).
+## Provenance
 
 **Development record:** [Shared Claude session in which the paper was developed](https://claude.ai/share/92fb43e0-7c12-4c22-949c-a54802300e64).
 
