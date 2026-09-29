@@ -12,7 +12,7 @@ A firm has an effectively unlimited supply of candidate projects (product concep
 
 ## Model
 
-Each project is good ($v=1$) or a dud ($v=0$); the payoff to launching is $v$. A human check on a project returns $s\in\{0,1\}$ with $\Pr(s=v)=p>\tfrac12$. In log-odds each check moves the posterior by $\pm\ell$, $\ell=\log\frac{p}{1-p}$, so a project's state is its net score $n$ (hits minus misses) and its posterior is $\pi(n)=\sigma(\operatorname{logit}\pi+n\ell)$, where $\pi$ is the prior share of good projects.
+Each project is good ($v=1$) or a dud ($v=0$); the payoff to launching is $v$. A human check on a project returns $`s\in\{0,1\}`$ with $\Pr(s=v)=p>\tfrac12$. In log-odds each check moves the posterior by $\pm\ell$, $\ell=\log\frac{p}{1-p}$, so a project's state is its net score $n$ (hits minus misses) and its posterior is $`\pi(n)=\sigma(\mathrm{logit}\,\pi+n\ell)`$, where $\pi$ is the prior share of good projects.
 
 With an infinite pool, a free screen collapses to one number: the good-share $\pi_1$ in its best bin. Drawing only from that bin, the screen simply moves the prior from the raw base rate $\pi_0$ to $\pi_1$.
 
